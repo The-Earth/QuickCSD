@@ -62,14 +62,19 @@ def main():
         curr_text = page.text()
         print(f'{curr_text}\n\n《{page.name}》\n\n')
         while 1:
-            opt = input('[D]elete, [K]eep, [S]kip, [O]pen browser: ')
+            opt = input('[D]elete, [K]eep, [S]kip, [O]pen browser or show last [R]evision: ')
             if opt.upper() == 'D':
                 delete(page)
+                break
             elif opt.upper() == 'K':
                 keep(page)
+                break
             elif opt.upper() == 'S':
-                continue
+                break
             elif opt.upper() == 'O':
                 open_browser(f'zh.wikipedia.org/wiki/{page.name}')
+                break
+            elif opt.upper() == 'R':
+                print(next(page.revisions()))
             else:
                 pass
