@@ -62,6 +62,7 @@ def main():
         if page.name.startswith('File') or page.name.startswith('Category'):
             continue
         curr_text = page.text()
+        rev = page.revisions()
         print(f'\n\n--------\n{curr_text}\n\n《{page.name}》\n')
         while 1:
             opt = input('[D]elete, [K]eep, [S]kip, [O]pen browser or show last [R]evision: ')
@@ -79,7 +80,10 @@ def main():
             elif opt.upper() == 'R':
                 print('\nPrinting last 5 revisions:\n')
                 for i in range(5):
-                    print(next(page.revisions()))
+                    try:
+                        print(next(rev))
+                    except StopIteration:
+                        pass
             else:
                 pass
 
