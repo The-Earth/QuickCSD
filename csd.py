@@ -10,7 +10,7 @@ pattern = re.compile(r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪
 def open_browser(url: str):
     old_path = os.getcwd()
     os.chdir(chrome_path)
-    os.system(f'./chrome "{url}"')
+    os.system(f'.\chrome "{url}"')
     os.chdir(old_path)
 
 
@@ -59,8 +59,10 @@ def main():
     zh.login(username, passwd)
     csd = listing.Category(site=zh, name='Category:快速删除候选')
     for page in csd:
+        if page.name.startswith('File') or page.name.starswith('Category'):
+            continue
         curr_text = page.text()
-        print(f'{curr_text}\n\n《{page.name}》\n\n')
+        print(f'\n\n--------\n{curr_text}\n\n《{page.name}》\n')
         while 1:
             opt = input('[D]elete, [K]eep, [S]kip, [O]pen browser or show last [R]evision: ')
             if opt.upper() == 'D':
@@ -75,6 +77,13 @@ def main():
                 open_browser(f'zh.wikipedia.org/wiki/{page.name}')
                 break
             elif opt.upper() == 'R':
-                print(next(page.revisions()))
+                print('\nPrinting last 5 revisions:\n')
+                for i in range(5):
+                    print(next(page.revisions()))
             else:
                 pass
+
+
+if __name__ == '__main__':
+    main()
+    os.system('pause')
