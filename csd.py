@@ -59,7 +59,7 @@ def main():
     zh.login(username, passwd)
     csd = listing.Category(site=zh, name='Category:快速删除候选')
     for page in csd:
-        if page.name.startswith('File') or page.name.starswith('Category'):
+        if page.name.startswith('File') or page.name.startswith('Category'):
             continue
         curr_text = page.text()
         print(f'\n\n--------\n{curr_text}\n\n《{page.name}》\n')
