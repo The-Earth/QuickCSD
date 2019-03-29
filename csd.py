@@ -4,6 +4,8 @@ from config import *
 import os
 import re
 
+pattern = re.compile(r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|快删)(\|.+)*\}\}')
+
 
 def open_browser(url: str):
     old_path = os.getcwd()
@@ -19,15 +21,37 @@ def generate_reason(reason: str):
             temp[i] = eval(temp[i])
         except NameError:
             pass
-    return '|'.join(temp)
+    return '；'.join(temp)
 
 
 def delete(page):
-    pass
+    while 1:
+        reason = generate_reason(input('Reason: '))
+        print('Reason: ', reason)
+        confirm = input('Confirm? [Y]es, [N]o or [Q]uit:')
+        if confirm.upper() == 'Y':
+            print(page.delete(reason))
+            break
+        elif confirm.upper() == 'Q':
+            break
+        else:
+            continue
 
 
 def keep(page):
-    pass
+    while 1:
+        reason = input('Reason: ')
+        print('Reason: ', reason)
+        confirm = input('Confirm? [Y]es, [N]o or [Q]uit:')
+        if confirm.upper() == 'Y':
+            old = page.text()
+            new = pattern.sub(old, '', count=1)
+            print(page.edit(new, reason))
+            break
+        elif confirm.upper() == 'Q':
+            break
+        else:
+            continue
 
 
 def main():
@@ -38,7 +62,7 @@ def main():
         curr_text = page.text()
         print(f'{curr_text}\n\n《{page.name}》\n\n')
         while 1:
-            opt = input('[D]elete, [K]eep, [S]kip, [O]pen browser')
+            opt = input('[D]elete, [K]eep, [S]kip, [O]pen browser: ')
             if opt.upper() == 'D':
                 delete(page)
             elif opt.upper() == 'K':
