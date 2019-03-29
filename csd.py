@@ -4,7 +4,7 @@ from config import *
 import os
 import re
 
-pattern = re.compile(r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|快删)(\|.+)*\}\}')
+delreg = re.compile(r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|快删)(\|.+)*\}\}')
 
 
 def open_browser(url: str):
@@ -45,7 +45,7 @@ def keep(page):
         confirm = input('Confirm? [Y]es, [N]o or [Q]uit:')
         if confirm.upper() == 'Y':
             old = page.text()
-            new = pattern.sub(old, '', count=1)
+            new = delreg.sub(old, '', count=1)
             print(page.edit(new, reason))
             break
         elif confirm.upper() == 'Q':
@@ -55,9 +55,9 @@ def keep(page):
 
 
 def main():
-    zh = mw.Site('zh.wikipedia.org')
+    zh = mw.Site(site)
     zh.login(username, passwd)
-    csd = listing.Category(site=zh, name='Category:快速删除候选')
+    csd = listing.Category(site=zh, name=csd_cat)
     for page in csd:
         if page.name.startswith('File') or page.name.startswith('Category'):
             continue
@@ -74,7 +74,7 @@ def main():
             elif opt.upper() == 'S':
                 break
             elif opt.upper() == 'O':
-                open_browser(f'zh.wikipedia.org/wiki/{page.name}')
+                open_browser(f'{site}/wiki/{page.name}')
                 break
             elif opt.upper() == 'R':
                 print('\nPrinting last 5 revisions:\n')

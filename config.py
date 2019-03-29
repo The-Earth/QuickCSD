@@ -1,9 +1,12 @@
 username = ''
 passwd = ''
 chrome_path = ''
+site = 'zh.wikipedia.org'
+csd_cat = 'Category:快速删除候选'
+pattern = r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|快删)(\|.+)*\}\}'
 
 g1 = "[[WP:G1|G1]]：没有实际内容的页面"
-G1 = g1
+G1 = empty = g1
 g2 = "[[WP:G2|G2]]：测试页面"
 G2 = g2
 g3 = "[[WP:G3|G3]]：纯粹[[WP:VAN|破坏]]，包括但不限于明显的[[WP:HOAX|恶作剧]]、错误信息、[[WP:PA|人身攻击]]等"
