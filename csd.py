@@ -54,6 +54,19 @@ def keep(page):
             continue
 
 
+def show_revision(page):
+    rev = page.revisions()
+    print('\nPrinting last 5 revisions:\n')
+    for i in range(5):
+        try:
+            next_rev = next(rev)
+            timestamp = time.strftime('%Y-%m-%d %H:%M:%S', next_rev['timestamp'])
+            print(f'User:{next_rev["user"]} - Time: {timestamp} - Comment: {next_rev["comment"]} - Revid:'
+                  f' {next_rev["revid"]}')
+        except StopIteration:
+            pass
+
+
 def main():
     zh = mw.Site(site)
     zh.login(username, passwd)
@@ -62,7 +75,6 @@ def main():
         if page.name.startswith('File') or page.name.startswith('Category'):
             continue
         curr_text = page.text()
-        rev = page.revisions()
         print(f'\n\n--------\n{curr_text}\n\n《{page.name}》\n')
         while 1:
             opt = input('[D]elete, [K]eep, [S]kip, [O]pen browser or show last [R]evision: ')
@@ -78,12 +90,7 @@ def main():
                 open_browser(f'{site}/wiki/{page.name}')
                 break
             elif opt.upper() == 'R':
-                print('\nPrinting last 5 revisions:\n')
-                for i in range(5):
-                    try:
-                        print(next(rev))
-                    except StopIteration:
-                        pass
+                show_revision(page)
             else:
                 pass
 
