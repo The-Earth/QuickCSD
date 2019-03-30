@@ -45,8 +45,8 @@ def keep(page):
         confirm = input('Confirm? [Y]es, [N]o or [Q]uit:')
         if confirm.upper() == 'Y':
             old = page.text()
-            new = delreg.sub(old, '', count=1)
-            print(page.edit(new, reason))
+            new = re.sub(delreg, '', old, count=1)
+            print(page.save(new, reason))
             break
         elif confirm.upper() == 'Q':
             break
