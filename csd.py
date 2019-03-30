@@ -4,7 +4,7 @@ from config import *
 import os
 import re
 
-delreg = re.compile(r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|快删)(\|.+)*\}\}')
+delreg = re.compile(r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|快删|hang\s*on)(\|.+)*\}\}')
 
 
 def open_browser(url: str):
@@ -45,7 +45,7 @@ def keep(page):
         confirm = input('Confirm? [Y]es, [N]o or [Q]uit:')
         if confirm.upper() == 'Y':
             old = page.text()
-            new = re.sub(delreg, '', old, count=1)
+            new = re.sub(delreg, '', old)
             print(page.save(new, reason))
             break
         elif confirm.upper() == 'Q':
