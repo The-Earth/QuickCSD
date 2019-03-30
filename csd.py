@@ -57,8 +57,7 @@ def keep(page):
             continue
 
 
-def show_revision(page):
-    rev = page.revisions()
+def show_revision(rev):
     print('\nPrinting last 5 revisions:\n')
     for i in range(5):
         try:
@@ -67,7 +66,8 @@ def show_revision(page):
             print(f'User:{next_rev["user"]} - Time: {timestamp} - Comment: {next_rev["comment"]} - Revid:'
                   f' {next_rev["revid"]}')
         except StopIteration:
-            pass
+            print('No more revisions.\n')
+            break
 
 
 def main():
@@ -79,6 +79,7 @@ def main():
             continue
         curr_text = page.text()
         print(f'\n\n--------\n{curr_text}\n\n《{page.name}》\n')
+        rev = page.revisions()
         while 1:
             opt = input('[D]elete, [K]eep, [S]kip, [O]pen browser or show last [R]evision: ')
             if opt.upper() == 'D':
@@ -93,7 +94,7 @@ def main():
                 open_browser(f'{site}/wiki/{page.name}')
                 break
             elif opt.upper() == 'R':
-                show_revision(page)
+                show_revision(rev)
             else:
                 pass
 
