@@ -1,8 +1,11 @@
-import mwclient as mw
-from mwclient import listing
-from config import *
 import os
 import re
+import time
+
+import mwclient as mw
+from mwclient import listing
+
+from config import *
 
 delreg = re.compile(r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|快删|hang\s*on)(\|.+)*\}\}')
 
@@ -10,7 +13,7 @@ delreg = re.compile(r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|
 def open_browser(url: str):
     old_path = os.getcwd()
     os.chdir(chrome_path)
-    os.system(f'.\chrome "{url}"')
+    os.system(f'.\\chrome "{url}"')
     os.chdir(old_path)
 
 
@@ -19,7 +22,7 @@ def generate_reason(reason: str):
     for i in range(len(temp)):
         try:
             temp[i] = eval(temp[i])
-        except NameError:
+        except:
             pass
     return '；'.join(temp)
 
