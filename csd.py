@@ -7,7 +7,7 @@ from mwclient import listing
 
 from config import *
 
-delreg = re.compile(r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|快删|hang\s*on)(\|.+)*\}\}')
+delreg = re.compile(pattern)
 
 
 def open_browser(url: str):

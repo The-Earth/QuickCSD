@@ -3,7 +3,7 @@ passwd = ''
 chrome_path = ''
 site = 'zh.wikipedia.org'
 csd_cat = 'Category:快速删除候选'
-pattern = r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|快删)(\|.+)*\}\}'
+pattern = r'\{\{\s*(db|[Dd]|sd|csd|speedy|delete|速刪|速删|快刪|快删|hang\s*on)(\|.+)*\}\}'
 
 g1 = "[[WP:G1|G1]]：没有实际内容的页面"
 G1 = empty = g1
@@ -46,7 +46,7 @@ A6 = a6
 r2 = "[[WP:R2|R2]]：跨[[H:NS|名字空间]]的[[WP:R|重定向]]"
 R2 = r2
 r3 = "[[WP:R3|R3]]：格式錯誤，或明显笔误的[[WP:R|重定向]]"
-R3 = r3
+R3 = wr =r3
 r5 = "[[WP:R5|R5]]：指向本身或循环的[[WP:R|重定向]]"
 R5 = r5
 r6 = "[[WP:R6|R6]]：移動檔案而產生的[[WP:R|重定向]]，且頁面標題不符合[[WP:FNC|檔案名稱指引]]"
